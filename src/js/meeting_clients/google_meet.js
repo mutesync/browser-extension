@@ -8,19 +8,12 @@ export class GoogleMeet extends Clients {
     }
 
     getStatus() {
-        let oldMuteButton = getElement("[data-is-muted] div");
-        let newMuteButton = getElement("[data-is-muted] button");
+        let newMuteButton = getElement("[data-is-muted]");
         let videoButton = (
             getElement('[aria-label="Turn off camera (ctrl + e)"]') || 
             getElement('[aria-label="Turn on camera (ctrl + e)"]')
         );
-        let status = ''
-
-        if(muteStatus(oldMuteButton, "data-is-muted") != 'disabled'){
-            status += `chromeMute:${muteStatus(oldMuteButton, "data-is-muted")},`
-        }else{
-            status += `chromeMute:${muteStatus(newMuteButton, "data-is-muted")},`
-        }
+        let status = `chromeMute:${muteStatus(newMuteButton, "data-is-muted")},`
 
         if(videoButton){
             videoButton = videoButton.getAttribute("data-is-muted") == "true" ? "stopped" : "started";
@@ -33,18 +26,13 @@ export class GoogleMeet extends Clients {
     }
 
     toggleMute() {
-        let oldMuteButton = getElement("[data-is-muted] div");
-        let newMuteButton = getElement("[data-is-muted] button");
+        let newMuteButton = getElement("[data-is-muted]");
 
-        if(!oldMuteButton && !newMuteButton){
+        if(!newMuteButton){
             return "chromeMute:disabled"
         }
-        
-        if(muteStatus(oldMuteButton, "data-is-muted") != 'disabled'){
-            oldMuteButton.click();
-        }else{
-            newMuteButton.click();
-        }
+
+        newMuteButton.click();
     }
 
     toggleVideo() {
