@@ -3,12 +3,14 @@ import {GoogleMeet} from "./meeting_clients/google_meet.js";
 import {Discord} from "./meeting_clients/discord.js";
 import {MicrosoftTeams} from "./meeting_clients/microsoft_teams.js";
 import {Slack} from "./meeting_clients/slack.js";
+import {Webex} from "./meeting_clients/webex.js";
 import {WhereBy} from "./meeting_clients/where_by.js";
 
 const googleMeetClient = new GoogleMeet();
 const discordClient = new Discord();
 const microsoftTeamsClient = new MicrosoftTeams();
 const slackClient = new Slack();
+const webexClient = new Webex();
 const whereByClient = new WhereBy();
 
 //Create a map of all the meeting clients ( host -> clientObj )
@@ -17,6 +19,7 @@ const meetingClientsMap = {
     ...Object.assign(...discordClient.targetUrls.map(url => ({ [url]: discordClient }))),
     ...Object.assign(...microsoftTeamsClient.targetUrls.map(url => ({ [url]: microsoftTeamsClient }))),
     ...Object.assign(...slackClient.targetUrls.map(url => ({ [url]: slackClient }))),
+    ...Object.assign(...webexClient.targetUrls.map(url => ({ [url]: webexClient }))),
     ...Object.assign(...whereByClient.targetUrls.map(url => ({ [url]: whereByClient })))
 }
 
